@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ru.vladigeras.springgrpc.api";
+
+service CityApiService {
+  rpc Create (CreateCityRq) returns (CreateCityRs);
+
+  rpc Find (FindCityRq) returns (FindCityRs);
+}
+
+message CreateCityRq {
+  string title = 1;
+  int64 countryId = 2;
+}
+
+message CreateCityRs {
+  int64 id = 1;
+}
+
+message FindCityRq {
+  string cityTitle = 1;
+  int64 countryId = 2;
+}
+
+message FindCityRs {
+  repeated CityDto cities = 1;
+}
+
+message CityDto {
+  int64 id = 1;
+  string title = 2;
+  CountryDto country = 3;
+}
+
+message CountryDto {
+  int64 id = 1;
+  string title = 2;
+}
